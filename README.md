@@ -37,19 +37,20 @@ Only valid and physically meaningful values were retained for analysis.
 
 Each cleaned NO₂ value \( x \) is transformed into a new variable \( z \) using a sinusoidal nonlinear mapping:
 
-\[
+$$
 z = x + a_r \sin(b_r x)
-\]
+$$
+
 
 The parameters \( a_r \) and \( b_r \) depend on the roll number \( r \):
 
-\[
+$$
 a_r = 0.05 \times (r \bmod 7)
-\]
+$$
 
-\[
+$$
 b_r = 0.3 \times ((r \bmod 5) + 1)
-\]
+$$
 
 ### Roll Number Details
 
@@ -66,9 +67,10 @@ Computed values:
 
 The transformed variable \( z \) is assumed to follow a Gaussian-shaped probability density function of the form:
 
-\[
+$$
 \hat{p}(z) = c \, e^{-\lambda (z - \mu)^2}
-\]
+$$
+
 
 The parameters \( \mu \), \( \lambda \), and \( c \) are estimated from data.
 
@@ -76,31 +78,32 @@ The parameters \( \mu \), \( \lambda \), and \( c \) are estimated from data.
 
 ## Parameter Estimation (MLE)
 
-The parameters are estimated using **Maximum Likelihood Estimation**:
+The parameters are estimated using **Maximum Likelihood Estimation (MLE)**.
 
 ### Mean
 
-\[
+$$
 \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} z_i
-\]
+$$
 
 ### Variance
 
-\[
+$$
 \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (z_i - \hat{\mu})^2
-\]
+$$
 
 ### Lambda
 
-\[
+$$
 \hat{\lambda} = \frac{1}{2\hat{\sigma}^2}
-\]
+$$
 
 ### Normalization Constant
 
-\[
+$$
 \hat{c} = \sqrt{\frac{\hat{\lambda}}{\pi}}
-\]
+$$
+
 
 ---
 
