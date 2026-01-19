@@ -105,7 +105,8 @@ outputs/estimated_params.csv
 
 A histogram of the transformed variable (z) is plotted with the fitted PDF overlaid to visually verify the estimation.
 
-![PDF Fit Plot](outputs/fit_plot.png)
+<img width="689" height="374" alt="image" src="https://github.com/user-attachments/assets/f1ea5bed-7b00-4183-8a81-04be1b17169e" />
+
 
 ---
 
