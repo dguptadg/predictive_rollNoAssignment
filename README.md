@@ -28,18 +28,16 @@ Given the NO₂ feature (x), it is transformed into (z) using a non‑linear fun
 
 ## Methodology
 
-### Step 1: Data Cleaning
+### Data Cleaning
 
 The NO₂ feature was cleaned using the following steps:
 
-* Converted values to numeric (`errors="coerce"`)
 * Removed missing values
 * Removed negative values
-* Removed extreme outliers using percentile range **[0.5, 99.5]** to improve numerical stability
 
 ---
 
-### Step 2: Non‑Linear Transformation (x → z)
+### Non‑Linear Transformation (x → z)
 
 The cleaned NO₂ values (x) are transformed into (z) using the roll‑number‑dependent function:
 
@@ -55,8 +53,8 @@ a_r = 0.05 (r \bmod 7), \quad b_r = 0.3 ((r \bmod 5) + 1)
 
 For **Roll Number: 102303877**
 
-* (r \bmod 7 = 6 \Rightarrow a_r = 0.3)
-* (r \bmod 5 = 2 \Rightarrow b_r = 0.9)
+* (Rightarrow a_r = 0.2)
+* (Rightarrow b_r = 0.8999999999999999)
 
 ---
 
