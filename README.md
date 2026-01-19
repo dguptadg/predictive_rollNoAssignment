@@ -95,10 +95,6 @@ Assuming a Gaussian‑shaped density, parameters are estimated using Maximum Lik
 
 The estimated parameters are saved as a CSV file at:
 
-```
-outputs/estimated_params.csv
-```
-
 ---
 
 ## Visualization
