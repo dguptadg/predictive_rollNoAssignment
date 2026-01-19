@@ -93,8 +93,6 @@ Assuming a Gaussian‑shaped density, parameters are estimated using Maximum Lik
 | Estimated Lambda ((\lambda)) | 0.0014593812811427918 |
 | Estimated (c)                |   0.02155308538236038 |
 
-The estimated parameters are saved as a CSV file at:
-
 ---
 
 ## Visualization
