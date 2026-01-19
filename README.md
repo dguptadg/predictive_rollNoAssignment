@@ -1,111 +1,141 @@
-# Q: Learn Probability Density Functions using Roll-Number-Parameterized Non-Linear Model
+# Probability Density Function Estimation with Roll-Number-Based Nonlinear Mapping
 
-## Objective
+## Project Description
 
-The objective of this assignment is to **learn and estimate a Probability Density Function (PDF)** for a transformed air‑quality feature using a **roll‑number‑parameterized non‑linear model**.
+This project demonstrates the estimation of a **Probability Density Function (PDF)** for air-quality data using a **custom nonlinear transformation** derived from a student roll number. The work applies data preprocessing, nonlinear feature mapping, and **Maximum Likelihood Estimation (MLE)** to learn a Gaussian-shaped density.
 
-Given the NO₂ feature (x), it is transformed into (z) using a non‑linear function dependent on the roll number, and the parameters of the following PDF are estimated:
-
-[
-\hat{p}(z) = c , e^{-\lambda (z - \mu)^2}
-]
+The NO₂ pollutant concentration values are transformed and modeled probabilistically to understand their distribution after transformation.
 
 ---
 
 ## Dataset
 
-* **Dataset Name:** India Air Quality Dataset
-* **Source:** Kaggle
-* **Link:** [https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data](https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data)
+- **Name:** India Air Quality Dataset  
+- **Source:** Kaggle  
+- **Link:** https://www.kaggle.com/datasets/shrutibhargava94/india-air-quality-data  
 
-### Dataset Details
+### Dataset Summary
 
-* Feature used: **NO₂ (`no2`)**
-* Total rows: **435,742**
-* Valid samples after cleaning: **415,688**
-
----
-
-## Methodology
-
-### Data Cleaning
-
-The NO₂ feature was cleaned using the following steps:
-
-* Removed missing values
-* Removed negative values
+- Feature selected: **NO₂ (`no2`)**
+- Total rows: **435,742**
+- Rows used after cleaning: **415,688**
 
 ---
 
-### Non‑Linear Transformation (x → z)
+## Data Cleaning Procedure
 
-The cleaned NO₂ values (x) are transformed into (z) using the roll‑number‑dependent function:
+The dataset was filtered using the following steps:
 
-[
+- Removed entries with missing NO₂ values
+- Discarded negative NO₂ measurements
+
+Only valid and physically meaningful values were retained for analysis.
+
+---
+
+## Nonlinear Transformation (x → z)
+
+Each cleaned NO₂ value \( x \) is transformed into a new variable \( z \) using a sinusoidal nonlinear mapping:
+
+\[
 z = x + a_r \sin(b_r x)
-]
+\]
 
-where:
+The parameters \( a_r \) and \( b_r \) depend on the roll number \( r \):
 
-[
-a_r = 0.05 (r \bmod 7), \quad b_r = 0.3 ((r \bmod 5) + 1)
-]
+\[
+a_r = 0.05 \times (r \bmod 7)
+\]
 
-For **Roll Number: 102303877**
+\[
+b_r = 0.3 \times ((r \bmod 5) + 1)
+\]
 
-* (Rightarrow a_r = 0.2)
-* (Rightarrow b_r = 0.8999999999999999)
+### Roll Number Details
+
+- **Roll Number:** 102303877
+
+Computed values:
+
+- \( a_r = 0.2 \)
+- \( b_r = 0.9 \)
 
 ---
 
-## Parameter Estimation (Maximum Likelihood Estimation)
+## Probability Density Model
 
-Assuming a Gaussian‑shaped density, parameters are estimated using Maximum Likelihood Estimation (MLE):
+The transformed variable \( z \) is assumed to follow a Gaussian-shaped probability density function of the form:
 
-[
+\[
+\hat{p}(z) = c \, e^{-\lambda (z - \mu)^2}
+\]
+
+The parameters \( \mu \), \( \lambda \), and \( c \) are estimated from data.
+
+---
+
+## Parameter Estimation (MLE)
+
+The parameters are estimated using **Maximum Likelihood Estimation**:
+
+### Mean
+
+\[
 \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} z_i
-]
+\]
 
-[
+### Variance
+
+\[
 \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (z_i - \hat{\mu})^2
-]
+\]
 
-[
-\hat{\lambda} = \frac{1}{2 \hat{\sigma}^2}
-]
+### Lambda
 
-[
+\[
+\hat{\lambda} = \frac{1}{2\hat{\sigma}^2}
+\]
+
+### Normalization Constant
+
+\[
 \hat{c} = \sqrt{\frac{\hat{\lambda}}{\pi}}
-]
+\]
 
 ---
 
-## Results
+##  Estimated Parameters
 
-### Estimated Parameters
-
-| Parameter                    |                 Value |
-| ---------------------------- | --------------------: |
-| Roll Number                  |             102303877 |
-| (a_r)                        |                   0.2 |
-| (b_r)                        |    0.8999999999999999 |
-| Estimated Mean ((\mu))       |    25.804091267939096 |
-| Estimated Lambda ((\lambda)) | 0.0014593812811427918 |
-| Estimated (c)                |   0.02155308538236038 |
+| Parameter | Value |
+|---------|------:|
+| Roll Number | 102303877 |
+| \( a_r \) | 0.2 |
+| \( b_r \) | 0.9 |
+| Estimated Mean \( \mu \) | 25.8041 |
+| Estimated \( \lambda \) | 0.001459 |
+| Estimated \( c \) | 0.02155 |
 
 ---
 
-## Visualization
+##  Visualization
 
-A histogram of the transformed variable (z) is plotted with the fitted PDF overlaid to visually verify the estimation.
+A histogram of the transformed variable \( z \) is plotted along with the fitted PDF to visually assess the quality of the estimation.
 
-<img width="689" height="374" alt="image" src="https://github.com/user-attachments/assets/f1ea5bed-7b00-4183-8a81-04be1b17169e" />
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f1ea5bed-7b00-4183-8a81-04be1b17169e" width="700">
+</p>
 
 ---
 
-## Notes
+##  Notes
 
-* This repository is created as part of a **Data Science assignment**.
-* The implementation focuses on clarity and correctness rather than optimization.
-* The project is suitable for beginners learning **PDF estimation, data cleaning, and MLE**.
+- This repository was created as part of a **Data Science academic assignment**
+- The emphasis is on **conceptual understanding and mathematical correctness**
+- The project is intended for learners exploring:
+  - Probability density functions
+  - Nonlinear transformations
+  - Maximum Likelihood Estimation
+  - Real-world data preprocessing
+
+---
+
